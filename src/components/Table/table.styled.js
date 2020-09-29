@@ -195,9 +195,27 @@ export const TableHeadersText = styled.span`
     color: rgb(16, 25, 34);
     font-size: 12px;
     text-transform: uppercase;
+    
 `;
 
-export const TableHeadersText2 = styled.span`
+export const MarketText = styled.span`
+@media (max-width: 768px) {
+    font-size: 9px;
+} 
+    font-weight: bold;
+    line-height: 1.5;
+    word-break: normal;
+    display: inline;
+    font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, btcglyph;
+    text-align: left;
+    color: rgb(16, 25, 34);
+    font-size: 12px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    
+`;
+
+export const MarketText2 = styled.span`
 @media (max-width: 768px) {
     font-size: 9px;
 } 
@@ -210,6 +228,7 @@ export const TableHeadersText2 = styled.span`
     color: rgb(16, 25, 34);
     font-size: 12px;
     text-transform: uppercase;
+    
 `;
 
 

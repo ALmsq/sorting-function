@@ -15,7 +15,8 @@ import {
     TableHeadersText,
     TableHeadersDiv,
     TableHeadersContainer2,
-    TableHeadersText2
+    MarketText,
+    MarketText2
 } from './table.styled'
 import { createGlobalStyle } from 'styled-components'
 import axios from 'axios'
@@ -135,55 +136,55 @@ const Table = () => {
                                     </TableHeadersImg>
 
                                     <TableHeadersDiv>
-                                        <TableHeadersText>
+                                        <MarketText>
                                             {array.id}
-                                        </TableHeadersText>
+                                        </MarketText>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
-                                        <TableHeadersText2>
+                                        <MarketText2>
                                             {array.base_currency}
-                                        </TableHeadersText2>
+                                        </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
-                                        <TableHeadersText2>
+                                        <MarketText2>
                                             {array.quote_currency}
-                                        </TableHeadersText2>
+                                        </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
-                                        <TableHeadersText2>
+                                        <MarketText2>
                                             {(parseFloat(array.base_min_size) >= 1? parseFloat(array.base_min_size): parseFloat(array.base_min_size).toFixed(3))}
-                                        </TableHeadersText2>
+                                        </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
-                                        <TableHeadersText2>
+                                        <MarketText2>
                                             {numberWithCommas(parseInt(array.base_max_size))}
-                                        </TableHeadersText2>
+                                        </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
-                                        <TableHeadersText2>
+                                        <MarketText2>
                                             {array.min_market_funds}
-                                        </TableHeadersText2>
+                                        </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
-                                        <TableHeadersText2>
+                                        <MarketText2>
                                             {numberWithCommas(parseInt(array.max_market_funds))}
-                                        </TableHeadersText2>
+                                        </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
-                                        <TableHeadersText2>
+                                        <MarketText2>
                                             {array.base_increment}
-                                        </TableHeadersText2>
+                                        </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
-                                        <TableHeadersText2>
+                                        <MarketText2>
                                         
                                             {(parseFloat(array.quote_increment) >= 1? parseFloat(array.quote_increment): parseFloat(array.quote_increment).toFixed(3))}
-                                        </TableHeadersText2>
+                                        </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
-                                        <TableHeadersText2>
+                                        <MarketText2>
                                             {array.limit_only? "Limit Only":"Full Trading"}
-                                        </TableHeadersText2>
+                                        </MarketText2>
                                     </TableHeadersDiv>
                                 </TableHeadersContainer>
                                     )
