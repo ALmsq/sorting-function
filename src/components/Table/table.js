@@ -178,7 +178,7 @@ const Table = () => {
                                     <TableHeadersDiv>
                                         <MarketText2>
                                         
-                                            {(parseFloat(array.quote_increment) >= 1? parseFloat(array.quote_increment): parseFloat(array.quote_increment).toFixed(3))}
+                                            {(parseFloat(array.quote_increment) == 1E-8 ? parseFloat(array.quote_increment).toFixed(8) : parseFloat(array.quote_increment))}
                                         </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
@@ -215,18 +215,52 @@ const Table = () => {
                                         </TableHeadersText>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv className='div2'>
-                                        <TableHeadersText className='span2'>
+                                        <TableHeadersText className='span2' style={{whiteSpace: 'normal'}}>
                                             QUOTE TICK SIZE
                                         </TableHeadersText>
                                     </TableHeadersDiv>
                                 </TableHeadersContainer2>
-                                <TableHeadersContainer2>
-                                <TableHeadersImg>
-                                        <TableHeadersSpan>
+                                {products.map((array) =>{
+                                    return(
+                                        <TableHeadersContainer2>
+                                            <TableHeadersImg>
+                                                <TableHeadersSpan>
 
-                                        </TableHeadersSpan>
-                                    </TableHeadersImg>
-                                </TableHeadersContainer2>
+                                                </TableHeadersSpan>
+                                            </TableHeadersImg>
+
+                                            <TableHeadersDiv>
+                                                <MarketText>
+                                                    {array.id}
+                                                    <div style={{fontWeight:'normal'}}>
+                                                    {array.limit_only? "Limit Only":"Full Trading"}
+                                                    </div>        
+                                                </MarketText>
+                                            </TableHeadersDiv>
+                                            <TableHeadersDiv>
+                                                <MarketText2>
+                                                    {(parseFloat(array.base_min_size) >= 1? parseFloat(array.base_min_size): parseFloat(array.base_min_size).toFixed(3))}
+                                                    <div>
+                                                    {numberWithCommas(parseInt(array.base_max_size))}
+                                                    </div>
+                                                </MarketText2>
+                                            </TableHeadersDiv>
+                                            <TableHeadersDiv>
+                                                <MarketText2>
+                                                    {array.min_market_funds}
+                                                    <div>
+                                                    {numberWithCommas(parseInt(array.max_market_funds))}
+                                                    </div>
+                                                </MarketText2>
+                                            </TableHeadersDiv>
+                                            <TableHeadersDiv>
+                                                <MarketText2>
+                                                    {(parseFloat(array.quote_increment) == 1E-8 ? parseFloat(array.quote_increment).toFixed(8) : parseFloat(array.quote_increment))}
+                                                </MarketText2>
+                                            </TableHeadersDiv>
+                                        </TableHeadersContainer2>
+                                    )
+                                })}
                             </TableContainer>
                             {/* <Rtable>
                                 <thead>

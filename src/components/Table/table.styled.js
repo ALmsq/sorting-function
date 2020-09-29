@@ -122,7 +122,7 @@ export const TableHeadersContainer2 = styled.thead`
     align-items: flex-end;
     border-collapse: separate;
 
-    &:nth-child(odd){
+    &:nth-child(even){
         background-color: rgb(233, 233, 233);
     }
 `
