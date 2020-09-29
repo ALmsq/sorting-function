@@ -33,21 +33,32 @@ function numberWithCommas(x) {
 
 
 const Table = () => {
-
+    
     const [products, setProducts] = useState([])
+    const [filtered, setFiltered] = useState([])
+    const [value, setValue] = useState('')
+
+    const handleChange = (e) =>{
+        setValue(e)
+    }
+
     // let products = []
     useEffect(() => {
         axios.get('https://api.pro.coinbase.com/bootstrap')
     .then((res) =>{
-        // products.push(res.data.products)
-        // console.log(res.data.products)
         setProducts(res.data.products)
-    })
+        setFiltered(res.data.products)
+    })  
     }, [])
+
+    useEffect(() => {
+        setFiltered(products.filter(word => word.id.includes(value.toUpperCase())))
+    },[value])
     return (
 
             <Wrapper>
-                {console.log(products)}
+                {console.log(filtered)}
+                
                 <GlobalStyle/>
                 <Wrapper2>
                     <Wrapper3>
@@ -59,7 +70,10 @@ const Table = () => {
                             <MarketInput
                             placeholder='Filter Markets'
                             font-size='smaller'
+                            onChange={(e) => handleChange(e.target.value)}
+                            
                             />
+                            {console.log(value)}
                             <TableContainer>
                                 <TableHeadersContainer>
                                     
@@ -124,7 +138,7 @@ const Table = () => {
 
                                 </TableHeadersContainer>
 
-                                {products.map((array) =>{
+                                {filtered.map((array) =>{
                                     
                                     return(
                                         <TableHeadersContainer>
@@ -220,7 +234,7 @@ const Table = () => {
                                         </TableHeadersText>
                                     </TableHeadersDiv>
                                 </TableHeadersContainer2>
-                                {products.map((array) =>{
+                                {filtered.map((array) =>{
                                     return(
                                         <TableHeadersContainer2>
                                             <TableHeadersImg>
@@ -229,7 +243,7 @@ const Table = () => {
                                                 </TableHeadersSpan>
                                             </TableHeadersImg>
 
-                                            <TableHeadersDiv>
+                                            <TableHeadersDiv style={{width: "100px"}}>
                                                 <MarketText>
                                                     {array.id}
                                                     <div style={{fontWeight:'normal'}}>

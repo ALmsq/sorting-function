@@ -39,13 +39,14 @@ export const Wrapper3 = styled.div`
     flex-direction: column;
     position: relative;
     background-color: rgb(7, 15, 21);
+    width: 100%;
 `
 
 
 export const OuterContainer = styled.div`   
     display: flex;
     flex-shrink: 0;
-    
+    width: 100%;
     align-items: center;
     flex-direction: column;
     background: rgb(249, 249, 249);
@@ -162,7 +163,7 @@ export const TableHeadersImg = styled.div`
 export const TableHeadersSpan = styled.span`
     display: flex;
     flex-direction: row;
-    flex: 1 1 100px;
+    // flex: 1 1 100px;
     margin: 8px;
     overflow: hidden;
     align-self: inherit;
@@ -185,6 +186,7 @@ export const TableHeadersDiv = styled.th`
 export const TableHeadersText = styled.span`
 @media (max-width: 768px) {
     font-size: 9px;
+    width: 20vw;
 } 
     font-weight: bold;
     line-height: 1.5;
@@ -201,7 +203,9 @@ export const TableHeadersText = styled.span`
 export const MarketText = styled.span`
 @media (max-width: 768px) {
     font-size: 9px;
+    width: 20vw;
 } 
+    
     font-weight: bold;
     line-height: 1.5;
     word-break: normal;
@@ -218,6 +222,7 @@ export const MarketText = styled.span`
 export const MarketText2 = styled.span`
 @media (max-width: 768px) {
     font-size: 9px;
+    width: 20vw;
 } 
     font-weight: normal;
     line-height: 1.5;
@@ -227,8 +232,7 @@ export const MarketText2 = styled.span`
     text-align: left;
     color: rgb(16, 25, 34);
     font-size: 12px;
-    text-transform: uppercase;
-    
+    white-space: nowrap
 `;
 
 
