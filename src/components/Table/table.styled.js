@@ -24,6 +24,7 @@ export const Wrapper = styled.div `
     @media (min-width: 1024px) {
         flex-wrap: nowrap;
       }
+      
     
 `
 export const Wrapper2 = styled.div`
@@ -106,6 +107,9 @@ export const TableHeadersContainer = styled.thead`
     align-items: flex-end;
     border-collapse: separate;
     overflow: hidden;
+    &:nth-child(even){
+        background-color: rgb(233, 233, 233);
+    }
 `
 export const TableHeadersContainer2 = styled.thead`
     @media (max-width: 768px) {
@@ -117,7 +121,10 @@ export const TableHeadersContainer2 = styled.thead`
     flex-direction: row;
     align-items: flex-end;
     border-collapse: separate;
-    
+
+    &:nth-child(odd){
+        background-color: rgb(233, 233, 233);
+    }
 `
 
 
@@ -188,9 +195,21 @@ export const TableHeadersText = styled.span`
     color: rgb(16, 25, 34);
     font-size: 12px;
     text-transform: uppercase;
-    
+`;
 
-    
+export const TableHeadersText2 = styled.span`
+@media (max-width: 768px) {
+    font-size: 9px;
+} 
+    font-weight: normal;
+    line-height: 1.5;
+    word-break: normal;
+    display: inline;
+    font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, btcglyph;
+    text-align: left;
+    color: rgb(16, 25, 34);
+    font-size: 12px;
+    text-transform: uppercase;
 `;
 
 

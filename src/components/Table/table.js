@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+
 import {
     Wrapper,
     Wrapper2,
@@ -13,10 +14,11 @@ import {
     TableHeadersSpan,
     TableHeadersText,
     TableHeadersDiv,
-    Rtable, 
-    TableHeadersContainer2 
+    TableHeadersContainer2,
+    TableHeadersText2
 } from './table.styled'
 import { createGlobalStyle } from 'styled-components'
+import axios from 'axios'
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -24,10 +26,27 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+
 const Table = () => {
+
+    const [products, setProducts] = useState([])
+    // let products = []
+    useEffect(() => {
+        axios.get('https://api.pro.coinbase.com/bootstrap')
+    .then((res) =>{
+        // products.push(res.data.products)
+        // console.log(res.data.products)
+        setProducts(res.data.products)
+    })
+    }, [])
     return (
 
             <Wrapper>
+                {console.log(products)}
                 <GlobalStyle/>
                 <Wrapper2>
                     <Wrapper3>
@@ -101,12 +120,76 @@ const Table = () => {
                                             STATUS
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    
-                                    
-
-
 
                                 </TableHeadersContainer>
+
+                                {products.map((array) =>{
+                                    
+                                    return(
+                                        <TableHeadersContainer>
+                                    
+                                    <TableHeadersImg>
+                                        <TableHeadersSpan>
+
+                                        </TableHeadersSpan>
+                                    </TableHeadersImg>
+
+                                    <TableHeadersDiv>
+                                        <TableHeadersText>
+                                            {array.id}
+                                        </TableHeadersText>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv>
+                                        <TableHeadersText2>
+                                            {array.base_currency}
+                                        </TableHeadersText2>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv>
+                                        <TableHeadersText2>
+                                            {array.quote_currency}
+                                        </TableHeadersText2>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv>
+                                        <TableHeadersText2>
+                                            {(parseFloat(array.base_min_size) >= 1? parseFloat(array.base_min_size): parseFloat(array.base_min_size).toFixed(3))}
+                                        </TableHeadersText2>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv>
+                                        <TableHeadersText2>
+                                            {numberWithCommas(parseInt(array.base_max_size))}
+                                        </TableHeadersText2>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv>
+                                        <TableHeadersText2>
+                                            {array.min_market_funds}
+                                        </TableHeadersText2>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv>
+                                        <TableHeadersText2>
+                                            {numberWithCommas(parseInt(array.max_market_funds))}
+                                        </TableHeadersText2>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv>
+                                        <TableHeadersText2>
+                                            {array.base_increment}
+                                        </TableHeadersText2>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv>
+                                        <TableHeadersText2>
+                                        
+                                            {(parseFloat(array.quote_increment) >= 1? parseFloat(array.quote_increment): parseFloat(array.quote_increment).toFixed(3))}
+                                        </TableHeadersText2>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv>
+                                        <TableHeadersText2>
+                                            {array.limit_only? "Limit Only":"Full Trading"}
+                                        </TableHeadersText2>
+                                    </TableHeadersDiv>
+                                </TableHeadersContainer>
+                                    )
+                                })}
+
+
                                 <TableHeadersContainer2>
                                     
                                     <TableHeadersImg>
@@ -135,6 +218,13 @@ const Table = () => {
                                             QUOTE TICK SIZE
                                         </TableHeadersText>
                                     </TableHeadersDiv>
+                                </TableHeadersContainer2>
+                                <TableHeadersContainer2>
+                                <TableHeadersImg>
+                                        <TableHeadersSpan>
+
+                                        </TableHeadersSpan>
+                                    </TableHeadersImg>
                                 </TableHeadersContainer2>
                             </TableContainer>
                             {/* <Rtable>
