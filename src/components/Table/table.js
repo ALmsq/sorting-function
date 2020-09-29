@@ -13,7 +13,8 @@ import {
     TableHeadersSpan,
     TableHeadersText,
     TableHeadersDiv,
-    Rtable 
+    Rtable, 
+    TableHeadersContainer2 
 } from './table.styled'
 import { createGlobalStyle } from 'styled-components'
 
@@ -106,6 +107,35 @@ const Table = () => {
 
 
                                 </TableHeadersContainer>
+                                <TableHeadersContainer2>
+                                    
+                                    <TableHeadersImg>
+                                        <TableHeadersSpan>
+
+                                        </TableHeadersSpan>
+                                    </TableHeadersImg>
+
+                                    <TableHeadersDiv style={{width: "100px"}}>
+                                        <TableHeadersText className='span2'>
+                                            MARKET/STATUS
+                                        </TableHeadersText>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv className='div2'>
+                                        <TableHeadersText className='span2'>
+                                            BASE ORDER MIN/MAX
+                                        </TableHeadersText>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv className='div2'>
+                                        <TableHeadersText className='span2'>
+                                            QUOTE ORDER MIN/MAX
+                                        </TableHeadersText>
+                                    </TableHeadersDiv>
+                                    <TableHeadersDiv className='div2'>
+                                        <TableHeadersText className='span2'>
+                                            QUOTE TICK SIZE
+                                        </TableHeadersText>
+                                    </TableHeadersDiv>
+                                </TableHeadersContainer2>
                             </TableContainer>
                             {/* <Rtable>
                                 <thead>

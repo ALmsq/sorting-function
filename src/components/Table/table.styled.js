@@ -10,13 +10,21 @@ export const Wrapper = styled.div `
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: ${px2vw(32)};
+    padding: 60px 40px;
+    // margin: ${px2vw(32)};
     overflow: hidden;
-    max-width: 100%
+    
+    max-width: 100%;
+
+    @media (max-width: 768px) {
+        padding: 20px;
+        
+      }
 
     @media (min-width: 1024px) {
         flex-wrap: nowrap;
       }
+    
 `
 export const Wrapper2 = styled.div`
     display: flex;
@@ -80,7 +88,7 @@ export const MarketInput = styled.input`
 export const TableContainer = styled.table`
     display: block;
     flex-direction: column;
-    overflow-x: auto;
+    overflow-x: hidden;
     margin-top: 30px;
     
     max-width: 100%;
@@ -88,12 +96,31 @@ export const TableContainer = styled.table`
 }
 `
 export const TableHeadersContainer = styled.thead`
+    @media (max-width: 768px) {
+        display: none;
+        
+    }
     display: flex;
     justify-content: left;
     flex-direction: row;
     align-items: flex-end;
-    border-collapse: separate
+    border-collapse: separate;
+    overflow: hidden;
 `
+export const TableHeadersContainer2 = styled.thead`
+    @media (max-width: 768px) {
+        display: flex;
+        justify-content: space-around;
+    }
+    display: none;
+    justify-content: left;
+    flex-direction: row;
+    align-items: flex-end;
+    border-collapse: separate;
+    
+`
+
+
 // display: flex;
 //     box-pack: center;
 //     justify-content: center;
@@ -106,10 +133,15 @@ export const TableHeadersContainer = styled.thead`
 //     margin: 8px;
 //     overflow: hidden;
 //     align-self: center;
-export const TableHeadersImg = styled.td`
-    text-align: left;
-    text-transform: uppercase;
-    margin: 8px
+export const TableHeadersImg = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex: 0 0 20px;
+    // text-align: left;
+    // text-transform: uppercase;
+    margin: 8px;
 `
 // font-weight: bold;
 //     line-height: 1.5;
@@ -120,26 +152,32 @@ export const TableHeadersImg = styled.td`
 //     color: rgb(16, 25, 34);
 //     font-size: 12px;
 //     text-transform: uppercase;
-export const TableHeadersSpan = styled.th`
+export const TableHeadersSpan = styled.span`
     display: flex;
     flex-direction: row;
     flex: 1 1 100px;
     margin: 8px;
     overflow: hidden;
     align-self: inherit;
+    
+    
 `
-export const TableHeadersDiv = styled.div`
+export const TableHeadersDiv = styled.th`
 @media (max-width: 768px) {
-    width: 100px
+    flex: 0 0 60px;
+    white-space: nowrap;
 }
     display: flex;
     flex-direction: row;
+    flex: 1 1 90px;
     margin: 8px;
+
 `
 
-export const TableHeadersText = styled.text`
+
+export const TableHeadersText = styled.span`
 @media (max-width: 768px) {
-    font-size: 9px
+    font-size: 9px;
 } 
     font-weight: bold;
     line-height: 1.5;
