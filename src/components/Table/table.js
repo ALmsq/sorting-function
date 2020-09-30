@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useCallback} from 'react'
 
 import {
     Wrapper,
@@ -34,30 +34,72 @@ function numberWithCommas(x) {
 
 const Table = () => {
     
-    const [products, setProducts] = useState([])
+    const [product, setProduct] = useState([])
     const [filtered, setFiltered] = useState([])
+    const [newArr, setNewArr] = useState([])
     const [value, setValue] = useState('')
+    const [sorted, setSorted] = useState('')
+    const [clicked, setClicked] = useState(false)
 
     const handleChange = (e) =>{
         setValue(e)
     }
 
+    const handleSort = (e) =>{
+        setSorted(e)
+    }
+    
+    // const handleSort = useCallback((e) =>{
+    //     setSorted(e)
+    // })
+
     // let products = []
     useEffect(() => {
         axios.get('https://api.pro.coinbase.com/bootstrap')
     .then((res) =>{
-        setProducts(res.data.products)
+        setProduct(res.data.products)
         setFiltered(res.data.products)
+        // console.log(res.data.products.sort((a,b) => ))
+        // console.log(res.data.products.sort((a,b) => a.base_min_size - b.base_min_size))
+        
     })  
     }, [])
 
+    let sortingFunction = (array, sorted) =>{
+        array.sort((a, b) => {
+            return(a[sorted] - b[sorted])
+        })
+        // console.log(array)
+    }
+    
+
     useEffect(() => {
-        setFiltered(products.filter(word => word.id.includes(value.toUpperCase())))
+        setFiltered(product.filter(word => word.id.includes(value.toUpperCase())))
     },[value])
+
+    useEffect(() => {
+   
+        if(sorted.length>1){
+            
+            let arr = filtered
+            sortingFunction(arr, sorted)
+            setFiltered(arr)
+            setClicked(!clicked)
+            console.log('clicked?',clicked)
+            // console.log('yo',[...arr])
+            
+            // console.log('filtered: ',filtered)
+            // console.log('sorted: ',sorted)
+        }
+
+    },[sorted, filtered])
+
     return (
 
             <Wrapper>
-                {console.log(filtered)}
+                {console.log('filtered: ',filtered)}
+                {/* {console.log('sorted: ', sorted)} */}
+                
                 
                 <GlobalStyle/>
                 <Wrapper2>
@@ -73,7 +115,7 @@ const Table = () => {
                             onChange={(e) => handleChange(e.target.value)}
                             
                             />
-                            {console.log(value)}
+                            
                             <TableContainer>
                                 <TableHeadersContainer>
                                     
@@ -84,7 +126,9 @@ const Table = () => {
                                     </TableHeadersImg>
 
 
-                                    <TableHeadersDiv>
+                                    <TableHeadersDiv
+                                    
+                                    >
                                         <TableHeadersText>
                                             Market
                                         </TableHeadersText>
@@ -100,13 +144,19 @@ const Table = () => {
                                             Quote
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    <TableHeadersDiv>
+                                    <TableHeadersDiv
+                                    style={{cursor:'pointer'}}
+                                    onClick={(e) => handleSort('base_min_size')}
+                                    >
                                         <TableHeadersText>
                                             BASE ORDER MIN
                                         </TableHeadersText>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
-                                        <TableHeadersText>
+                                        <TableHeadersText
+                                        style={{cursor:'pointer'}}
+                                        onClick={(e) => handleSort('base_max_size')}
+                                        >
                                             BASE ORDER MAX
                                         </TableHeadersText>
                                     </TableHeadersDiv>
@@ -186,7 +236,7 @@ const Table = () => {
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
                                         <MarketText2>
-                                            {array.base_increment}
+                                            {(parseFloat(array.base_increment) == 1E-8 ? parseFloat(array.base_increment).toFixed(8) : parseFloat(array.base_increment))}
                                         </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
@@ -209,23 +259,23 @@ const Table = () => {
                                     
                                     <TableHeadersImg>
                                         <TableHeadersSpan>
-
+                                            
                                         </TableHeadersSpan>
                                     </TableHeadersImg>
 
                                     <TableHeadersDiv style={{width: "100px"}}>
                                         <TableHeadersText className='span2'>
-                                            MARKET/STATUS
+                                            MARKET/ STATUS
                                         </TableHeadersText>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv className='div2'>
                                         <TableHeadersText className='span2'>
-                                            BASE ORDER MIN/MAX
+                                            BASE ORDER MIN/ MAX
                                         </TableHeadersText>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv className='div2'>
                                         <TableHeadersText className='span2'>
-                                            QUOTE ORDER MIN/MAX
+                                            QUOTE ORDER MIN/ MAX
                                         </TableHeadersText>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv className='div2'>

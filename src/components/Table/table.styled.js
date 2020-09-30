@@ -7,6 +7,7 @@ import px2vw from '../../utils/px2vw'
 // background: rgb(249, 249, 249);
 //top
 export const Wrapper = styled.div `
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -15,6 +16,7 @@ export const Wrapper = styled.div `
     overflow: hidden;
     
     max-width: 100%;
+    
 
     @media (max-width: 768px) {
         padding: 20px;
@@ -165,7 +167,7 @@ export const TableHeadersSpan = styled.span`
     flex-direction: row;
     // flex: 1 1 100px;
     margin: 8px;
-    overflow: hidden;
+    
     align-self: inherit;
     
     
@@ -173,7 +175,11 @@ export const TableHeadersSpan = styled.span`
 export const TableHeadersDiv = styled.th`
 @media (max-width: 768px) {
     flex: 0 0 60px;
-    white-space: nowrap;
+    white-space: normal;
+    &:nth-child(n+2){
+        
+    }
+    
 }
     display: flex;
     flex-direction: row;
@@ -187,6 +193,9 @@ export const TableHeadersText = styled.span`
 @media (max-width: 768px) {
     font-size: 9px;
     width: 20vw;
+    white-space: normal;
+    display: flex;
+    flex-wrap: wrap;
 } 
     font-weight: bold;
     line-height: 1.5;
@@ -204,6 +213,7 @@ export const MarketText = styled.span`
 @media (max-width: 768px) {
     font-size: 9px;
     width: 20vw;
+
 } 
     
     font-weight: bold;
