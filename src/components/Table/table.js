@@ -17,7 +17,7 @@ import {
     TableHeadersContainer2,
     MarketText,
     MarketText2,
-    SortText
+    SortText,
 } from './table.styled'
 import { createGlobalStyle } from 'styled-components'
 import axios from 'axios'
@@ -61,7 +61,7 @@ const Table = () => {
     }, [])
 
     let sortingFunction = (array, sorted) =>{
-        console.log(order)
+        
         array.sort((a, b) => {
             const x = a[sorted]
             const y = b[sorted]
@@ -113,13 +113,12 @@ const Table = () => {
                                         </TableHeadersSpan>
                                     </TableHeadersImg>
 
-
+                            
                                     <TableHeadersDiv>
                                         <TableHeadersText>
                                             Market
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    
                                     <TableHeadersDiv>
                                         <TableHeadersText>
                                             Base
@@ -179,14 +178,12 @@ const Table = () => {
                                             STATUS
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-
                                 </TableHeadersContainer>
 
                                 {filtered.map((array) =>{
                                     
                                     return(
-                                        <TableHeadersContainer>
-                                    
+                                        <TableHeadersContainer key={array.id}>
                                     <TableHeadersImg>
                                         <TableHeadersSpan>
 
@@ -194,7 +191,7 @@ const Table = () => {
                                     </TableHeadersImg>
 
                                     <TableHeadersDiv>
-                                        <MarketText>
+                                        <MarketText href={`https://pro.coinbase.com/trade/${array.id}`} target="_blank">
                                             {array.id}
                                         </MarketText>
                                     </TableHeadersDiv>
@@ -230,13 +227,12 @@ const Table = () => {
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
                                         <MarketText2>
-                                            {(parseFloat(array.base_increment) == 1E-8 ? parseFloat(array.base_increment).toFixed(8) : parseFloat(array.base_increment))}
+                                            {(parseFloat(array.base_increment) === 1E-8 ? parseFloat(array.base_increment).toFixed(8) : parseFloat(array.base_increment))}
                                         </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
                                         <MarketText2>
-                                        
-                                            {(parseFloat(array.quote_increment) == 1E-8 ? parseFloat(array.quote_increment).toFixed(8) : parseFloat(array.quote_increment))}
+                                            {(parseFloat(array.quote_increment) === 1E-8 ? parseFloat(array.quote_increment).toFixed(8) : parseFloat(array.quote_increment))}
                                         </MarketText2>
                                     </TableHeadersDiv>
                                     <TableHeadersDiv>
@@ -250,7 +246,6 @@ const Table = () => {
                                     
 
                                 <TableHeadersContainer2>
-                                    
                                     <TableHeadersImg>
                                         <TableHeadersSpan>
                                             
@@ -289,7 +284,7 @@ const Table = () => {
                                 </TableHeadersContainer2>
                                 {filtered.map((array) =>{
                                     return(
-                                        <TableHeadersContainer2>
+                                        <TableHeadersContainer2 key={array.id}>
                                             <TableHeadersImg>
                                                 <TableHeadersSpan>
 
@@ -297,7 +292,7 @@ const Table = () => {
                                             </TableHeadersImg>
 
                                             <TableHeadersDiv style={{width: "100px"}}>
-                                                <MarketText>
+                                                <MarketText  href={`https://pro.coinbase.com/trade/${array.id}`} target="_blank">
                                                     {array.id}
                                                     <div style={{fontWeight:'normal'}}>
                                                     {array.limit_only? "Limit Only":"Full Trading"}
@@ -322,25 +317,13 @@ const Table = () => {
                                             </TableHeadersDiv>
                                             <TableHeadersDiv>
                                                 <MarketText2>
-                                                    {(parseFloat(array.quote_increment) == 1E-8 ? parseFloat(array.quote_increment).toFixed(8) : parseFloat(array.quote_increment))}
+                                                    {(parseFloat(array.quote_increment) === 1E-8 ? parseFloat(array.quote_increment).toFixed(8) : parseFloat(array.quote_increment))}
                                                 </MarketText2>
                                             </TableHeadersDiv>
                                         </TableHeadersContainer2>
                                     )
                                 })}
                             </TableContainer>
-                            {/* <Rtable>
-                                <thead>
-                                    <tr>
-                                        <th>first</th>
-                                        <th>first</th>
-                                        <th>first</th>
-                                        <th>first</th>
-                                        <th>first</th>
-                                        <th>first</th>
-                                    </tr>
-                                </thead>
-                            </Rtable> */}
                         </InnerContainer>
                     </OuterContainer>
                     </Wrapper3>

@@ -89,7 +89,7 @@ export const MarketInput = styled.input`
 `
 
 //table
-export const TableContainer = styled.table`
+export const TableContainer = styled.div`
     display: block;
     flex-direction: column;
     overflow-x: hidden;
@@ -99,7 +99,7 @@ export const TableContainer = styled.table`
     border: 1px solid rgb(204, 204, 204);
 }
 `
-export const TableHeadersContainer = styled.thead`
+export const TableHeadersContainer = styled.div`
     @media (max-width: 768px) {
         display: none;
         
@@ -114,7 +114,7 @@ export const TableHeadersContainer = styled.thead`
         background-color: rgb(233, 233, 233);
     }
 `
-export const TableHeadersContainer2 = styled.thead`
+export const TableHeadersContainer2 = styled.div`
     @media (max-width: 768px) {
         display: flex;
         justify-content: space-around;
@@ -172,7 +172,7 @@ export const TableHeadersSpan = styled.span`
     
     
 `
-export const TableHeadersDiv = styled.th`
+export const TableHeadersDiv = styled.div`
 @media (max-width: 768px) {
     flex: 0 0 60px;
     white-space: normal;
@@ -209,7 +209,7 @@ export const TableHeadersText = styled.span`
     
 `;
 
-export const MarketText = styled.span`
+export const MarketText = styled.a`
 @media (max-width: 768px) {
     font-size: 9px;
     width: 20vw;
@@ -226,6 +226,14 @@ export const MarketText = styled.span`
     font-size: 12px;
     text-transform: uppercase;
     white-space: nowrap;
+
+    
+
+    cursor: pointer;
+    text-decoration: none;
+    &:visited {
+        text-decoration: none;
+    }
     
 `;
 
@@ -249,6 +257,13 @@ export const SortText = styled.div`
     cursor: pointer;
     &:hover {
         text-decoration: underline;
+    }
+`
+export const MarketAnchor = styled.a`
+    cursor: pointer;
+    text-decoration: none;
+    &:visited {
+        text-decoration: none;
     }
 `
 
