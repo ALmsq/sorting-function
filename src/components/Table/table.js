@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {
     Wrapper,
@@ -16,7 +16,8 @@ import {
     TableHeadersDiv,
     TableHeadersContainer2,
     MarketText,
-    MarketText2
+    MarketText2,
+    SortText
 } from './table.styled'
 import { createGlobalStyle } from 'styled-components'
 import axios from 'axios'
@@ -36,10 +37,10 @@ const Table = () => {
     
     const [product, setProduct] = useState([])
     const [filtered, setFiltered] = useState([])
-    const [newArr, setNewArr] = useState([])
     const [value, setValue] = useState('')
     const [sorted, setSorted] = useState('')
     const [clicked, setClicked] = useState(false)
+    const [order, setOrder] = useState(false)
 
     const handleChange = (e) =>{
         setValue(e)
@@ -47,60 +48,47 @@ const Table = () => {
 
     const handleSort = (e) =>{
         setSorted(e)
+        setOrder(!order)
     }
-    
-    // const handleSort = useCallback((e) =>{
-    //     setSorted(e)
-    // })
 
-    // let products = []
+   
     useEffect(() => {
         axios.get('https://api.pro.coinbase.com/bootstrap')
     .then((res) =>{
         setProduct(res.data.products)
         setFiltered(res.data.products)
-        // console.log(res.data.products.sort((a,b) => ))
-        // console.log(res.data.products.sort((a,b) => a.base_min_size - b.base_min_size))
-        
     })  
     }, [])
 
     let sortingFunction = (array, sorted) =>{
+        console.log(order)
         array.sort((a, b) => {
-            return(a[sorted] - b[sorted])
+            const x = a[sorted]
+            const y = b[sorted]
+            return(order? y - x : x - y)
         })
-        // console.log(array)
     }
     
 
     useEffect(() => {
         setFiltered(product.filter(word => word.id.includes(value.toUpperCase())))
-    },[value])
+    },[value, product])
 
     useEffect(() => {
    
         if(sorted.length>1){
-            
             let arr = filtered
             sortingFunction(arr, sorted)
             setFiltered(arr)
             setClicked(!clicked)
-            console.log('clicked?',clicked)
-            // console.log('yo',[...arr])
-            
-            // console.log('filtered: ',filtered)
-            // console.log('sorted: ',sorted)
         }
 
-    },[sorted, filtered])
+    },[sorted, filtered, order])
 
     return (
 
             <Wrapper>
-                {console.log('filtered: ',filtered)}
-                {/* {console.log('sorted: ', sorted)} */}
-                
-                
+  
                 <GlobalStyle/>
                 <Wrapper2>
                     <Wrapper3>
@@ -126,9 +114,7 @@ const Table = () => {
                                     </TableHeadersImg>
 
 
-                                    <TableHeadersDiv
-                                    
-                                    >
+                                    <TableHeadersDiv>
                                         <TableHeadersText>
                                             Market
                                         </TableHeadersText>
@@ -146,41 +132,49 @@ const Table = () => {
                                     </TableHeadersDiv>
                                     <TableHeadersDiv
                                     style={{cursor:'pointer'}}
-                                    onClick={(e) => handleSort('base_min_size')}
-                                    >
+                                    onClick={(e) => handleSort('base_min_size')}>
                                         <TableHeadersText>
                                             BASE ORDER MIN
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    <TableHeadersDiv>
-                                        <TableHeadersText
-                                        style={{cursor:'pointer'}}
-                                        onClick={(e) => handleSort('base_max_size')}
-                                        >
+                                    <TableHeadersDiv
+                                    style={{cursor:'pointer'}}
+                                    onClick={(e) => handleSort('base_max_size')}>
+                                        <TableHeadersText>
                                             BASE ORDER MAX
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    <TableHeadersDiv>
+                                    <TableHeadersDiv
+                                    style={{cursor:'pointer'}}
+                                    onClick={(e) => handleSort('min_market_funds')}>
                                         <TableHeadersText>
                                             QUOTE ORDER MIN
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    <TableHeadersDiv>
+                                    <TableHeadersDiv
+                                    style={{cursor:'pointer'}}
+                                    onClick={(e) => handleSort('max_market_funds')}>
                                         <TableHeadersText>
                                             QUOTE ORDER MAX
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    <TableHeadersDiv>
+                                    <TableHeadersDiv
+                                    style={{cursor:'pointer'}}
+                                    onClick={(e) => handleSort('base_increment')}>
                                         <TableHeadersText>
                                             BASE TICK SIZE
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    <TableHeadersDiv>
+                                    <TableHeadersDiv
+                                    style={{cursor:'pointer'}}
+                                    onClick={(e) => handleSort('quote_increment')}>
                                         <TableHeadersText>
                                             QUOTE TICK SIZE
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    <TableHeadersDiv>
+                                    <TableHeadersDiv 
+                                    style={{cursor:'pointer'}}
+                                    onClick={(e) => handleSort('limit_only')}>
                                         <TableHeadersText>
                                             STATUS
                                         </TableHeadersText>
@@ -253,7 +247,7 @@ const Table = () => {
                                 </TableHeadersContainer>
                                     )
                                 })}
-
+                                    
 
                                 <TableHeadersContainer2>
                                     
@@ -264,25 +258,34 @@ const Table = () => {
                                     </TableHeadersImg>
 
                                     <TableHeadersDiv style={{width: "100px"}}>
-                                        <TableHeadersText className='span2'>
+                                        <TableHeadersText >
                                             MARKET/ STATUS
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    <TableHeadersDiv className='div2'>
-                                        <TableHeadersText className='span2'>
-                                            BASE ORDER MIN/ MAX
+                                    <TableHeadersDiv>
+                                        <TableHeadersText>
+                                            <SortText
+                                        onClick={(e) => handleSort('base_min_size')}>BASE ORDER MIN/</SortText>
+                                            <SortText
+                                        onClick={(e) => handleSort('base_max_size')}>MAX</SortText>
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    <TableHeadersDiv className='div2'>
-                                        <TableHeadersText className='span2'>
-                                            QUOTE ORDER MIN/ MAX
+                                    <TableHeadersDiv>
+                                        <TableHeadersText>
+                                            <SortText
+                                        onClick={(e) => handleSort('min_market_funds')}>QUOTE ORDER MIN/</SortText>
+                                            <SortText
+                                        onClick={(e) => handleSort('max_market_funds')}>MAX</SortText>
                                         </TableHeadersText>
                                     </TableHeadersDiv>
-                                    <TableHeadersDiv className='div2'>
-                                        <TableHeadersText className='span2' style={{whiteSpace: 'normal'}}>
+                                    <TableHeadersDiv>
+                                        <TableHeadersText style={{whiteSpace: 'normal'}}
+                                        style={{cursor:'pointer'}}
+                                        onClick={(e) => handleSort('quote_increment')}>
                                             QUOTE TICK SIZE
                                         </TableHeadersText>
                                     </TableHeadersDiv>
+
                                 </TableHeadersContainer2>
                                 {filtered.map((array) =>{
                                     return(

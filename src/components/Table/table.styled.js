@@ -245,6 +245,12 @@ export const MarketText2 = styled.span`
     white-space: nowrap
 `;
 
+export const SortText = styled.div`
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+`
 
 
 
