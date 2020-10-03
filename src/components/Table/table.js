@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
+
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -87,9 +88,7 @@ const Table = () => {
     },[sorted, filtered, order])
 
     return (
-
             <Wrapper>
-  
                 <GlobalStyle/>
                 <Wrapper2>
                     <Wrapper3>
